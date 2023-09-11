@@ -18,6 +18,7 @@ def train(config: configs.TrainConfig):
         .config("spark.executor.memory", spark_config.executor_memory)
         .config("spark.cassandra.connection.host", "cassandra")
         .config("spark.cassandra.connection.port", "9042")
+        .config("spark.jars", "/opt/spark/jars/spark-cassandra-connector.jar")
         .getOrCreate()
     )
     data = (

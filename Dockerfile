@@ -4,7 +4,7 @@ WORKDIR /app
 
 USER root
 
-ENV PYSPARK_SUBMIT_ARGS="--packages com.datastax.spark:spark-cassandra-connector_2.12:3.4.1 --conf spark.cassandra.connection.host=cassandra pyspark-shell"
+RUN mkdir /jars && curl -L -o /opt/spark/jars/spark-cassandra-connector.jar https://repo1.maven.org/maven2/com/datastax/spark/spark-cassandra-connector-assembly_2.12/3.4.1/spark-cassandra-connector-assembly_2.12-3.4.1.jar
 
 COPY requirements.txt /app
 
