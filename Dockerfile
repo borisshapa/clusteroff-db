@@ -8,7 +8,6 @@ USER root
 RUN mkdir /jars && curl -L -o /opt/spark/jars/spark-cassandra-connector.jar https://repo1.maven.org/maven2/com/datastax/spark/spark-cassandra-connector-assembly_2.12/3.4.1/spark-cassandra-connector-assembly_2.12-3.4.1.jar
 
 ADD requirements.txt /app
-ADD requirements.txt /app
 ADD configs /app/configs
 ADD scripts /app/scripts
 ADD src /app/src
