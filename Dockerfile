@@ -5,6 +5,8 @@ ENV SBT_VERSION="1.9.4"
 
 USER root
 
+ENV PYTHONPATH="${PYTHONPATH}:/app"
+
 RUN mkdir /jars && curl -L -o /opt/spark/jars/spark-cassandra-connector.jar https://repo1.maven.org/maven2/com/datastax/spark/spark-cassandra-connector-assembly_2.12/3.4.1/spark-cassandra-connector-assembly_2.12-3.4.1.jar
 
 ADD requirements.txt /app
