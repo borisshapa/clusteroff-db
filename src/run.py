@@ -26,7 +26,7 @@ def train(config: configs.TrainConfig):
         .options(**dataclasses.asdict(config.db))
         .load()
     )
-    df = utils.preprocess(data, config.data.columns, config.data.size)
+    df = utils.preprocess(data, config.data.columns)
 
     df.show()
 

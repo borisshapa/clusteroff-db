@@ -10,7 +10,6 @@ FEATURES_COLUMN = "scaled_feature"
 def preprocess(
     df: pyspark.sql.DataFrame,
     columns_filename: str,
-    size: int,
 ) -> pyspark.sql.DataFrame:
     with open(columns_filename, "r") as columns_file:
         columns = ujson.load(columns_file)
@@ -24,13 +23,11 @@ def preprocess(
 
     all_columns = id_columns + feature_columns + cat_columns
     df_with_selected_columns = df.select(*all_columns)
-    df_without_null = df_with_selected_columns.dropna()
-    limited = df_without_null.limit(size)
 
     vec_assembler = feature.VectorAssembler(
         inputCols=feature_column_names, outputCol="features"
     )
-    df_with_features = vec_assembler.transform(limited)
+    df_with_features = vec_assembler.transform(df_with_selected_columns)
 
     scaler = feature.StandardScaler(inputCol="features", outputCol=FEATURES_COLUMN)
     scaler_model = scaler.fit(df_with_features)
